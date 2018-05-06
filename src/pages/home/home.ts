@@ -6,7 +6,7 @@ import { MainPage } from '../main/main'
   templateUrl: 'home.html'
 })
 export class HomePage {
-
+  mainPage:any = MainPage
   constructor(public navCtrl: NavController) {
 
   }

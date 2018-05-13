@@ -1,0 +1,34 @@
+
+<ion-menu [content]="myNav">
+    <ion-header>
+        <ion-toolbar>
+            <ion-title>
+                My Menu
+            </ion-title>
+        </ion-toolbar>
+
+    </ion-header>
+    <ion-content>
+        <ion-list>
+            <button ion-item (click)="openPage(rootPage)">
+
+<ion-icon name="home"></ion-icon>
+               Home
+            </button>
+            <button ion-item (click)="openPage(aboutPage)">
+                <ion-icon name="information-circle"></ion-icon>
+
+                About
+            </button>
+            <button ion-item (click)="openPage(settingsPage)">
+                <ion-icon name="settings"></ion-icon>
+                Settings
+            </button>
+            <button ion-item menuClose>
+                <ion-icon name="close"></ion-icon>
+                Close menu</button>
+        </ion-list>
+    </ion-content>
+
+</ion-menu>
+<ion-nav  #myNav [root]="rootPage"></ion-nav>

@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Pokémons</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+
+  <ion-list>
+
+    <ion-item *ngFor="let pok of pokemons">
+      {{ pok.name}}
+
+
+    </ion-item>
+
+  </ion-list>
+</ion-content>

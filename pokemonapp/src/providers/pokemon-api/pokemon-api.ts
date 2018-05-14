@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import {Observable} from "rxjs/Observable";
+import {IPokemonResult} from "../../models/pokemon-results";
 
 /*
   Generated class for the PokemonApiProvider provider.
@@ -15,9 +17,9 @@ export class PokemonApiProvider {
   constructor(public http: HttpClient) {
     console.log('Hello PokemonApiProvider Provider');
   }
-   getPokemons() {
+   getPokemons(): Observable<IPokemonResult> {
 
-      return this.http.get( this.pokUrl)
+      return this.http.get<IPokemonResult>( this.pokUrl)
 
    }
 }

@@ -10,8 +10,15 @@
 
   <ion-list>
 
+
     <ion-item *ngFor="let pok of pokemons">
-      {{ pok.name}}
+        <ion-thumbnail item-start>
+            <img [src]="pok.img">
+        </ion-thumbnail>
+        <h2>{{ pok.name}}</h2>
+        <button ion-button clear item-end>
+            <ion-icon name="arrow-dropright"></ion-icon>
+        </button>
 
 
     </ion-item>

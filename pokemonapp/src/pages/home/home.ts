@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import {PokemonApiProvider} from "../../providers/pokemon-api/pokemon-api";
 
 import { Pokemon} from "../../models/pokemon";
+import {PokemonDetailPage} from "../pokemon-detail/pokemon-detail";
 
 @Component({
   selector: 'page-home',
@@ -18,5 +19,9 @@ export class HomePage {
 
   }
 
+  showPokDetail( pok: Pokemon) {
+       alert(pok.name)
+       this.navCtrl.push('PokemonDetailPage', {pok})
+  }
 
 }

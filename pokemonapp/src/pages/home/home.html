@@ -16,7 +16,7 @@
             <img [src]="pok.img">
         </ion-thumbnail>
         <h2>{{ pok.name}}</h2>
-        <button ion-button clear item-end>
+        <button ion-button clear item-end (click)="showPokDetail(pok)">
             <ion-icon name="arrow-dropright"></ion-icon>
         </button>
 

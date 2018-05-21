@@ -5,6 +5,7 @@ import {PokemonApiProvider} from "../../providers/pokemon-api/pokemon-api";
 import {Observable} from "rxjs/Observable";
 import {pluck} from "rxjs/operators";
 import {HomePage} from "../home/home";
+import {IPokemonDetails} from "../../models/pokemon-details";
 
 /**
  * Generated class for the PokemonDetailPage page.
@@ -22,14 +23,15 @@ import {HomePage} from "../home/home";
 export class PokemonDetailPage {
   
    pok : Pokemon
-    pokdetails: any
+    pokdetails$: Observable<IPokemonDetails>
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private pokApi: PokemonApiProvider
   ) {
       this.pok = this.navParams.get('pok')
-      pokApi.getPokemonDetails(this.pok).subscribe((res: any) => console.log(res))
+    this.pokdetails$ =   pokApi.getPokemonDetails(this.pok)
+      
 
 
 

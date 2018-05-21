@@ -13,13 +13,14 @@ export class HomePage {
 
    pokemons:[Pokemon]
 
-  constructor(public navCtrl: NavController, pokApi: PokemonApiProvider) {
+  constructor(public navCtrl: NavController, private pokApi: PokemonApiProvider) {
 
       pokApi.getPokemons().subscribe( (res: [Pokemon])=>  this.pokemons = res)
 
   }
 
   showPokDetail( pok: Pokemon) {
+       //this.pokApi.getPokemonDetails(pok).s
         this.navCtrl.push('PokemonDetailPage', {id:pok.id, pok:pok})
   }
 

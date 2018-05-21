@@ -12,7 +12,7 @@ import {IPokemonDetails} from "../../models/pokemon-details";
 export class PokemonApiProvider {
 
   pokUrl = "https://pokeapi.co/api/v2/pokemon/"
-    private limit = 1000
+    private limit = 10
 
   constructor(public http: HttpClient) {
     console.log('Hello PokemonApiProvider Provider');

@@ -20,8 +20,7 @@ export class HomePage {
   }
 
   showPokDetail( pok: Pokemon) {
-       alert(pok.name)
-       this.navCtrl.push('PokemonDetailPage', {pok})
+        this.navCtrl.push('PokemonDetailPage', {id:pok.id, pok:pok})
   }
 
 }

@@ -15,14 +15,15 @@ import {Pokemon} from "../../models/pokemon";
 @Injectable()
 export class PokemonApiProvider {
 
-  pokUrl = "https://pokeapi.co/api/v2/pokemon/?limit=1000"
+  pokUrl = "https://pokeapi.co/api/v2/pokemon/"
+    private limit = 1000
 
   constructor(public http: HttpClient) {
     console.log('Hello PokemonApiProvider Provider');
   }
    getPokemons():Observable<Pokemon[]> {
 
-      return this.http.get<IPokemonResult>( this.pokUrl).pipe(
+      return this.http.get<IPokemonResult>( this.pokUrl +'?limit'+this.limit).pipe(
             map((res: IPokemonResult)  =>  res.results),
 
             map( (res: [IPokemonData]) => {
@@ -33,4 +34,31 @@ export class PokemonApiProvider {
       )
 
    }
+   getPokemonDetails(pok: Pokemon) {
+
+      return this.http.get(this.pokUrl + pok.id)
+
+
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

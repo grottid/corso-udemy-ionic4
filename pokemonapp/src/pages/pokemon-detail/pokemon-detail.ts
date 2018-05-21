@@ -22,14 +22,14 @@ import {HomePage} from "../home/home";
 export class PokemonDetailPage {
   
    pok : Pokemon
-    pokdetails: Observable<any>
+    pokdetails: any
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private pokApi: PokemonApiProvider
   ) {
-
-      this.pokdetails =      pokApi.getPokemonDetails(this.pok)
+      this.pok = this.navParams.get('pok')
+      pokApi.getPokemonDetails(this.pok).subscribe((res: any) => console.log(res))
 
 
 

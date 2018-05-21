@@ -5,13 +5,9 @@ import {IPokemonResult} from "../../models/pokemon-results";
 import {map} from "rxjs/operators";
 import {IPokemonData} from "../../models/pokemon-data";
 import {Pokemon} from "../../models/pokemon";
+import {IPokemonDetails} from "../../models/pokemon-details";
 
-/*
-  Generated class for the PokemonApiProvider provider.
 
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class PokemonApiProvider {
 
@@ -22,9 +18,10 @@ export class PokemonApiProvider {
     console.log('Hello PokemonApiProvider Provider');
   }
    getPokemons():Observable<Pokemon[]> {
-
-      return this.http.get<IPokemonResult>( this.pokUrl +'?limit'+this.limit).pipe(
+    
+      return this.http.get<IPokemonResult>( this.pokUrl +'?limit='+this.limit).pipe(
             map((res: IPokemonResult)  =>  res.results),
+           
 
             map( (res: [IPokemonData]) => {
                 return res.map( pokData => new Pokemon(pokData) )
@@ -34,9 +31,9 @@ export class PokemonApiProvider {
       )
 
    }
-   getPokemonDetails(pok: Pokemon) {
+   getPokemonDetails(pok: Pokemon): Observable<IPokemonDetails> {
 
-      return this.http.get(this.pokUrl + pok.id)
+      return this.http.get<IPokemonDetails>(this.pokUrl + pok.id)
 
 
    }

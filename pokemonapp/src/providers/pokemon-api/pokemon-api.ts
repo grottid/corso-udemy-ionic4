@@ -18,7 +18,7 @@ export class PokemonApiProvider {
     console.log('Hello PokemonApiProvider Provider');
   }
    getPokemons():Observable<Pokemon[]> {
-    
+
       return this.http.get<IPokemonResult>( this.pokUrl +'?limit='+this.limit).pipe(
             map((res: IPokemonResult)  =>  res.results),
            

@@ -23,14 +23,15 @@ import {IPokemonDetails} from "../../models/pokemon-details";
 export class PokemonDetailPage {
   
    pok : Pokemon
-    pokdetails$: Observable<IPokemonDetails>
+    pokdetails: IPokemonDetails
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private pokApi: PokemonApiProvider
   ) {
+
       this.pok = this.navParams.get('pok')
-    this.pokdetails$ =   pokApi.getPokemonDetails(this.pok)
+    this.pokdetails =  this.navParams.get('pokDetail')
       
 
 

@@ -4,6 +4,7 @@ import {PokemonApiProvider} from "../../providers/pokemon-api/pokemon-api";
 
 import { Pokemon} from "../../models/pokemon";
 import {PokemonDetailPage} from "../pokemon-detail/pokemon-detail";
+import {IPokemonDetails} from "../../models/pokemon-details";
 
 @Component({
   selector: 'page-home',
@@ -20,8 +21,12 @@ export class HomePage {
   }
 
   showPokDetail( pok: Pokemon) {
-       //this.pokApi.getPokemonDetails(pok).s
-        this.navCtrl.push('PokemonDetailPage', {id:pok.id, pok:pok})
+       this.pokApi.getPokemonDetails(pok).subscribe(
+           (res:IPokemonDetails) => {
+               this.navCtrl.push('PokemonDetailPage', {pokDetail: res, pok:pok})
+           }
+       )
+
   }
 
 }

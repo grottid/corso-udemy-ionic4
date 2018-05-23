@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {Observable} from "rxjs/Observable";
 import {IPokemonResult} from "../../models/pokemon-results";
-import {map} from "rxjs/operators";
+import {map, tap} from "rxjs/operators";
 import {IPokemonData} from "../../models/pokemon-data";
 import {Pokemon} from "../../models/pokemon";
 import {IPokemonDetails} from "../../models/pokemon-details";
@@ -12,7 +12,7 @@ import {IPokemonDetails} from "../../models/pokemon-details";
 export class PokemonApiProvider {
 
   pokUrl = "https://pokeapi.co/api/v2/pokemon/"
-    private limit = 10
+    private limit = 100
 
   constructor(public http: HttpClient) {
     console.log('Hello PokemonApiProvider Provider');
@@ -25,7 +25,10 @@ export class PokemonApiProvider {
 
             map( (res: [IPokemonData]) => {
                 return res.map( pokData => new Pokemon(pokData) )
-            })
+            }),
+          tap(res => {
+              localStorage.setItem('pokemons', JSON.stringify(res) )
+          })
 
 
       )
@@ -33,7 +36,11 @@ export class PokemonApiProvider {
    }
    getPokemonDetails(pok: Pokemon): Observable<IPokemonDetails> {
 
-      return this.http.get<IPokemonDetails>(this.pokUrl + pok.id)
+      return this.http.get<IPokemonDetails>(this.pokUrl + pok.id).pipe(
+          tap(res => {
+              localStorage.setItem('pokemon', JSON.stringify(res) )
+          })
+      )
 
 
    }

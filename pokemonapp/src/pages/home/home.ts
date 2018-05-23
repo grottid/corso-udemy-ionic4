@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import {LoadingController, NavController} from 'ionic-angular';
 import {PokemonApiProvider} from "../../providers/pokemon-api/pokemon-api";
 
 import { Pokemon} from "../../models/pokemon";
 import {PokemonDetailPage} from "../pokemon-detail/pokemon-detail";
 import {IPokemonDetails} from "../../models/pokemon-details";
+import {PokDataProvider} from "../../providers/pok-data/pok-data";
 
 @Component({
   selector: 'page-home',
@@ -14,13 +15,31 @@ export class HomePage {
 
    pokemons:[Pokemon]
 
-  constructor(public navCtrl: NavController, private pokApi: PokemonApiProvider) {
+   loading: any
+  constructor(public navCtrl: NavController, private pokApi: PokDataProvider,
+              private loadingCtrl: LoadingController) {
+        this.presentLoading()
 
-      pokApi.getPokemons().subscribe( (res: [Pokemon])=>  this.pokemons = res)
+      pokApi.getPokemons().subscribe( (res: [Pokemon])=>  {
+          this.loading.dismiss()
+          this.pokemons = res
+      }
+          )
 
   }
+    presentLoading() {
+        this.loading = this.loadingCtrl.create({
+            content: 'Please wait...',
+            dismissOnPageChange : true
+        });
+
+        this.loading.present();
+
+
+    }
 
   showPokDetail( pok: Pokemon) {
+       this.presentLoading()
        this.pokApi.getPokemonDetails(pok).subscribe(
            (res:IPokemonDetails) => {
                this.navCtrl.push('PokemonDetailPage', {pokDetail: res, pok:pok})

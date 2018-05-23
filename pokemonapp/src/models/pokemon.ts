@@ -4,7 +4,7 @@ export class Pokemon {
     name: string
     img : string
     id: number
-    private spriteUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
+    private spriteUrl = "assets/pokemon/"
     
     constructor(pok: IPokemonData) {
 

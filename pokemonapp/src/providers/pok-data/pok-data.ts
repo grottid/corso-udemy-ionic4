@@ -46,5 +46,31 @@ export class PokDataProvider {
 
 
     }
+    getFavoritePokemons() {
+        let favorites : Pokemon[] = []
+        if( localStorage.getItem('favorite-pokemons')) {
+            const favoritesLocal = JSON.parse(localStorage.getItem('favorite-pokemons'))
+            if(favoritesLocal){
+                favorites = favoritesLocal
 
+            }
+        }
+        return of(favorites)
+    }
+
+    addToFavorite(pok: Pokemon) {
+         let favorites : Pokemon[] = []
+
+        if( localStorage.getItem('favorite-pokemons')) {
+             const favoritesLocal = JSON.parse(localStorage.getItem('favorite-pokemons'))
+            if(favoritesLocal){
+                 favorites = favoritesLocal
+
+            }
+        }
+        favorites.push(pok)
+        console.log(favorites)
+        localStorage.setItem('favorite-pokemons', JSON.stringify(favorites))
+        console.log('add to favorite localstorage')
+    }
 }

@@ -16,7 +16,12 @@ export class PokSearchbarComponent {
 
   constructor() {
     console.log('Hello PokSearchbarComponent Component');
-    this.text = 'Hello World';
+    this.text = '';
   }
-
+    onInput(evt) {
+       alert(evt.target.value)
+    }
+    onCancel(evt) {
+        alert(evt.target.value)
+    }
 }

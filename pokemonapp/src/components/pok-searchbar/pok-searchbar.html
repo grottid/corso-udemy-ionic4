@@ -1,4 +1,6 @@
-<!-- Generated template for the PokSearchbarComponent component -->
-<div>
-  {{text}}
-</div>
+<ion-searchbar
+        [(ngModel)]="text"
+        [showCancelButton]= true
+        (ionInput)="onInput($event)"
+        (ionCancel)="onCancel($event)">
+</ion-searchbar>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {LoadingController, NavController} from 'ionic-angular';
+import {Events, LoadingController, NavController} from 'ionic-angular';
 import {PokemonApiProvider} from "../../providers/pokemon-api/pokemon-api";
 
 import { Pokemon} from "../../models/pokemon";
@@ -14,10 +14,18 @@ import {PokDataProvider} from "../../providers/pok-data/pok-data";
 export class HomePage {
 
    pokemons:Pokemon[]
+    allpoks : Pokemon[]
 
    loading: any
-  constructor(public navCtrl: NavController, private pokApi: PokDataProvider,
-              private loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController,
+              private pokApi: PokDataProvider,
+              private loadingCtrl: LoadingController,
+              private  evt: Events
+  ) {
+        this.evt.subscribe('pok-searched',  res => {
+            this.filterPoks(res)
+        })
+
         this.presentLoading()
 
       pokApi.getPokemons().subscribe( (res: [Pokemon])=>  {
@@ -28,6 +36,7 @@ export class HomePage {
                    }
                    return a.name > b.name ? 1 : -1
               })
+          this.allpoks = this.pokemons.slice()
       }
           )
 
@@ -52,5 +61,12 @@ export class HomePage {
        )
 
   }
+    filterPoks( text: string) {
+         if(text.length === 0) {
+             this.pokemons = this.allpoks
+             return
+         }
+        this.pokemons = this.pokemons.filter( pok => pok.name.startsWith(text))
+    }
 
 }

@@ -29,17 +29,22 @@ export class FavoritePage {
        private  evt : Events,
       private pokData: PokDataProvider) {
 
+
+      this.evt.subscribe('pok-searched',  res => {
+          this.reloadPoks(res)
+      })
+
       this.evt.subscribe('favorite-added', () => {
-         this.reloadPoks()
+         this.reloadPoks('')
       })
 
   }
-   reloadPoks() {
-       this.favorites$ = this.pokData.getFavoritePokemons()
+   reloadPoks(namefilter : string) {
+       this.favorites$ = this.pokData.getFavoritePokemons(namefilter)
    }
   ionViewDidLoad() {
-    this.reloadPoks()
-    console.log('ionViewDidLoad FavoritePage');
+    this.reloadPoks('')
+
   }
     presentLoading() {
         this.loading = this.loadingCtrl.create({
@@ -61,5 +66,6 @@ export class FavoritePage {
         )
 
     }
+
 
 }

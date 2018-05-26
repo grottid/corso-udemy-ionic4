@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { FavoritePage } from './favorite';
+import {PokSearchBarModule} from "../../components/components.module";
 
 
 @NgModule({
@@ -8,7 +9,8 @@ import { FavoritePage } from './favorite';
     FavoritePage,
   ],
   imports: [
-    IonicPageModule.forChild(FavoritePage)
+    IonicPageModule.forChild(FavoritePage),
+      PokSearchBarModule
   ],
 })
 export class FavoritePageModule {}

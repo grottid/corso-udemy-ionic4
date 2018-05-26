@@ -47,12 +47,15 @@ export class PokDataProvider {
 
 
     }
-    getFavoritePokemons() {
+    getFavoritePokemons(filter : string) {
         let favorites : Pokemon[] = []
         if( localStorage.getItem('favorite-pokemons')) {
             const favoritesLocal = JSON.parse(localStorage.getItem('favorite-pokemons'))
             if(favoritesLocal){
                 favorites = favoritesLocal
+                if(filter) {
+                    favorites = favorites.filter( res => res.name.startsWith(filter))
+                }
 
             }
         }

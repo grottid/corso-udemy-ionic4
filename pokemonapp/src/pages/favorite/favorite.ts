@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Events, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {PokDataProvider} from "../../providers/pok-data/pok-data";
 import {Observable} from "rxjs/Observable";
 import {Pokemon} from "../../models/pokemon";
@@ -20,11 +20,20 @@ export class FavoritePage {
 
   favorites$ : Observable<Pokemon[]>
 
-  constructor( private pokData: PokDataProvider) {
-  }
+  constructor(
+       private  evt : Events,
+      private pokData: PokDataProvider) {
 
+      this.evt.subscribe('favorite-added', () => {
+         this.reloadPoks()
+      })
+
+  }
+   reloadPoks() {
+       this.favorites$ = this.pokData.getFavoritePokemons()
+   }
   ionViewDidLoad() {
-    this.favorites$ = this.pokData.getFavoritePokemons()
+    this.reloadPoks()
     console.log('ionViewDidLoad FavoritePage');
   }
 

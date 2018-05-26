@@ -1,0 +1,9 @@
+<!-- Generated template for the SearchbarComponent component -->
+<ion-searchbar
+        [(ngModel)]="search"
+        [showCancelButton]="shouldShowCancel"
+        placeholder="Search a pok"
+
+        (ionInput)="onInput($event)"
+        (ionCancel)="onCancel($event)">
+</ion-searchbar>

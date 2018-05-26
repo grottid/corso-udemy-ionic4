@@ -58,7 +58,7 @@ export class PokDataProvider {
         return of(favorites)
     }
 
-    addToFavorite(pok: Pokemon) {
+    addToFavorite(pok: Pokemon, add: boolean) {
          let favorites : Pokemon[] = []
 
         if( localStorage.getItem('favorite-pokemons')) {
@@ -68,7 +68,12 @@ export class PokDataProvider {
 
             }
         }
-        favorites.push(pok)
+        if(add) {
+            favorites.push(pok)
+        } else {
+            favorites = favorites.filter( res => res.name !== pok.name)
+        }
+
         console.log(favorites)
         localStorage.setItem('favorite-pokemons', JSON.stringify(favorites))
         console.log('add to favorite localstorage')

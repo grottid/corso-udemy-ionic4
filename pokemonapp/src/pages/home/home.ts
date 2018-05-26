@@ -13,7 +13,7 @@ import {PokDataProvider} from "../../providers/pok-data/pok-data";
 })
 export class HomePage {
 
-   pokemons:[Pokemon]
+   pokemons:Pokemon[]
 
    loading: any
   constructor(public navCtrl: NavController, private pokApi: PokDataProvider,

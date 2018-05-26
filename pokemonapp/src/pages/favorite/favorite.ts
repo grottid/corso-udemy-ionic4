@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import {Events, IonicPage, NavController, NavParams} from 'ionic-angular';
+import {Events, IonicPage, LoadingController, NavController} from 'ionic-angular';
 import {PokDataProvider} from "../../providers/pok-data/pok-data";
 import {Observable} from "rxjs/Observable";
 import {Pokemon} from "../../models/pokemon";
+import {IPokemonDetails} from "../../models/pokemon-details";
+import {PokemonApiProvider} from "../../providers/pokemon-api/pokemon-api";
 
 /**
  * Generated class for the FavoritePage page.
@@ -19,8 +21,11 @@ import {Pokemon} from "../../models/pokemon";
 export class FavoritePage {
 
   favorites$ : Observable<Pokemon[]>
-
+    loading: any
   constructor(
+      private navCtrl: NavController,
+      private pokApi: PokDataProvider,
+       private loadingCtrl : LoadingController,
        private  evt : Events,
       private pokData: PokDataProvider) {
 
@@ -36,5 +41,25 @@ export class FavoritePage {
     this.reloadPoks()
     console.log('ionViewDidLoad FavoritePage');
   }
+    presentLoading() {
+        this.loading = this.loadingCtrl.create({
+            content: 'Please wait...',
+            dismissOnPageChange : true
+        });
+
+        this.loading.present();
+
+
+    }
+
+    showPokDetail( pok: Pokemon) {
+        this.presentLoading()
+        this.pokApi.getPokemonDetails(pok).subscribe(
+            (res:IPokemonDetails) => {
+                this.navCtrl.push('PokemonDetailPage', {pokDetail: res, pok:pok})
+            }
+        )
+
+    }
 
 }

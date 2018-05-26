@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { SearchbarComponent } from './searchbar/searchbar';
 import {IonicModule} from "ionic-angular";
 import {CommonModule} from "@angular/common";
+import { PokSearchbarComponent } from './pok-searchbar/pok-searchbar';
 @NgModule({
-	declarations: [SearchbarComponent],
+	declarations: [PokSearchbarComponent],
 	imports: [IonicModule, CommonModule],
-	exports: [SearchbarComponent]
+	exports: [PokSearchbarComponent]
 })
-export class SearchBarModule {}
+export class PokSearchBarModule {}

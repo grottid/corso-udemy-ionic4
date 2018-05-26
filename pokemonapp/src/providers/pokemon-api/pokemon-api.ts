@@ -38,7 +38,7 @@ export class PokemonApiProvider {
 
       return this.http.get<IPokemonDetails>(this.pokUrl + pok.id).pipe(
           tap(res => {
-              localStorage.setItem('pokemon', JSON.stringify(res) )
+              localStorage.setItem('pokemon-' + pok.name , JSON.stringify(res) )
           })
       )
 

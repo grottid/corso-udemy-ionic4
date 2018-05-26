@@ -22,7 +22,12 @@ export class HomePage {
 
       pokApi.getPokemons().subscribe( (res: [Pokemon])=>  {
           this.loading.dismiss()
-          this.pokemons = res
+          this.pokemons = res.sort( (a, b) => {
+                   if(a.name === b.name) {
+                       return 0
+                   }
+                   return a.name > b.name ? 1 : -1
+              })
       }
           )
 

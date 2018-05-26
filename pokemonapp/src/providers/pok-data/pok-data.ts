@@ -34,9 +34,10 @@ export class PokDataProvider {
 
     }
     getPokemonDetails(pok: Pokemon): Observable<IPokemonDetails> {
+        const storageId = 'pokemon-' + pok.name
+        if( localStorage.getItem(storageId)) {
+            const pokResults = JSON.parse(localStorage.getItem(storageId))
 
-        if( localStorage.getItem('pokemon')) {
-            const pokResults = JSON.parse(localStorage.getItem('pokemon'))
             if(pokResults){
                 return of(pokResults)
             }
@@ -55,6 +56,13 @@ export class PokDataProvider {
 
             }
         }
+        favorites.sort( (a, b) => {
+            if(a.name === b.name) {
+                return 0
+            }
+            return a.name > b.name ? 1 : -1
+        })
+
         return of(favorites)
     }
 

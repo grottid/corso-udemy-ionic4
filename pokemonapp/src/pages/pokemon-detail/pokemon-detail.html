@@ -44,11 +44,11 @@
         <ion-row>
             <ion-col col-6 text-center>
                 <button ion-button icon-left clear small (click)="addToFavorite()">
-                    <ion-icon color="{{isFavorite ? 'danger' : ''}}" name="heart"></ion-icon>
+                    <ion-icon color="{{isFavorite ? 'danger' : ''}}" name="heart{{isFavorite ? '' : '-outline'}}"></ion-icon>
                 </button>
             </ion-col>
             <ion-col  col-6 text-center>
-                <button ion-button icon-left clear small>{{isFavorite}}
+                <button ion-button icon-left clear small>
                     <ion-icon  name="share"></ion-icon>
 
                 </button>
